@@ -1,5 +1,8 @@
 <?php
-// TThis is my CONTROLLER
+// Controller for the Dating site "My Moon"
+// Date: 28/01/2021
+// Nematullah Ayaz Akhundzada
+
 
 //Turn on Error reporting
 ini_set('display_errors',TRUE);
