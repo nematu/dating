@@ -1,0 +1,34 @@
+.row {
+   border-style: solid;
+    border-color: black;
+    margin: 50px;
+    display: flex;
+    padding: 50px;
+}
+
+.column {
+    flex: 50%;
+}
+.title{
+    text-align-all: center;
+}
+nav{
+    background-color: black;
+}
+.navbar-brand{
+    color: white;
+    font-weight: bold;
+
+}
+.img-main {
+    margin-left: 70px;
+
+
+}
+.body-txt {
+    font-weight: normal;
+}
+#btn-profile {
+    float: inherit;
+    border-radius: 10px;
+}
