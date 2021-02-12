@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/forms.css">
+
+    <title>profile</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse text-white bg-dark">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li ><a class=" navbar-brand text-white"  href="https://nayaz.greenriverdev.com/328/dating/">My Moon</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="border rounded mt-4 p-4 pb-5 mb-4">
+        <h2 class="text-info">Profile</h2>
+        <hr>
+        <form action ="interest" method="post">
+            <div class="row">
+                <div class="col-sm-8">
+                    <label for="email" class="font-weight-bold">Email</label>
+                    <input type="text" class="form-control" id="email" name="email"><br>
+
+                    <label for="state" class="font-weight-bold">State</label>
+                    <select id="state" name="state" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>Alabama</option>
+                        <option>Alaska</option>
+                        <option>Arizona</option>
+                        <option>Arkansas</option>
+                        <option>California</option>
+                        <option>Colorado</option>
+                        <option>Connecticut</option>
+                        <option>Delaware</option>
+                        <option>District Of Columbia</option>
+                        <option>Florida</option>
+                        <option>Georgia</option>
+                        <option>Washington</option>
+
+                    </select>
+
+
+                    <!-- Seeking Radio Options -->
+                    <div class="form-group mt-2">
+                        <label class="font-weight-bold">Seeking</label><br>
+                        <!-- Radios-->
+                        <label for= "male2" class="radio-inline">
+                            <input  type="radio" name="gender2[]" id="male2" value="male"> Male</label>
+                        <label for="female2" class="radio-inline">
+                            <input type="radio" name="gender2[]" id="female2" value="female"> Female</label><br>
+
+                    </div>
+
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="form-group">
+                        <label for="biography"class="font-weight-bold">Biography:</label>
+                        <textarea class="form-control" rows="4" id="biography" name="biography" placeholder="Entering a brief description about yourself"></textarea>
+                    </div>
+                </div>
+                <!--Next Button -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 bg-light text-right">
+                            <button type="submit" class="btn btn-info">Next ></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

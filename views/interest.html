@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/forms.css">
+
+    <title>Interests</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse text-white bg-dark">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li ><a class=" navbar-brand text-white"  href="https://nayaz.greenriverdev.com/328/dating/">My Moon</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="border rounded mt-4 p-4 pb-5 mb-4">
+        <h2 class="text-info">Interests</h2>
+        <hr>
+        <form action= "summary" method="POST">
+
+            <label class="font-weight-bold"> In-Door Interests</label>
+            <div class="row pl-3">
+                <!-- In Door row -->
+                <div class="form-group col-3">
+                    <div class="form-check">
+                        <label class="form-check-label" >
+                            <input type="checkbox" class="form-check-input" name = "s[]"  value="tv">tv
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name = "interests[]" value="puzzles">puzzles
+                        </label>
+                    </div>
+                </div>
+                <!-- column separation -->
+                <div class="form-group col-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name = "interests[]" value="movies">movies
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name = "interests[]" value="reading">reading
+                        </label>
+                    </div>
+                </div>
+                <!-- column separation -->
+                <div class="form-group col-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name = "interests[]" value="cooking">cooking
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name = "interests[]" value="cards">playing cards
+                        </label>
+                    </div>
+                </div>
+                <!-- column separation -->
+                <div class="form-group col-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name = "interests[]" value="board games">board games
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name = "interests[]" value="video games">video games
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Out Door Section -->
+            <label class="font-weight-bold"> Out-Door Interests</label>
+            <div class="row pl-3">
+                <!-- In Door row -->
+                <div class="form-group col-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name = "interests[]" value="hike">hiking
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name = "interests[]" value="walk">walking
+                        </label>
+                    </div>
+                </div>
+                <!-- column separation -->
+                <div class="form-group col-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name = "interests[]" value="bike">biking
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input"  name = "interests[]" value="climb">climbing
+                        </label>
+                    </div>
+                </div>
+                <!-- column separation -->
+                <div class="form-group col-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name = "interests[]" value="swim">swimming
+                        </label>
+                    </div>
+
+                </div>
+                <!-- column separation -->
+                <div class="form-group col-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input"  name = "interests[]" value="collect">collecting
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+                <!--Next Button -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 bg-light text-right">
+                            <button type="submit" class="btn btn-info">Next ></button>
+                        </div>
+                    </div>
+                </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

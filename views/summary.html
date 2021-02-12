@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/forms.css">
+
+    <title>Summary</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse text-white bg-dark">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li ><a class=" navbar-brand text-white"  href="https://nayaz.greenriverdev.com/328/dating/">My Moon</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="border rounded mt-5 p-4">
+        <div class="row">
+            <div class="col">
+                <table class="table table-bordered col">
+                    <tbody>
+                        <tr>
+                            <td>Name: {{@name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender: {{@gender}}</td>
+                        </tr>
+                        <tr>
+                            <td>Age: {{@age}}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone: {{@phone}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email: {{@email}}</td>
+                        </tr>
+                        <tr>
+                            <td>State: {{@state}}</td>
+                        </tr>
+                        <tr>
+                            <td>Seeking: {{@seeking}}</td>
+                        </tr>
+                        <tr>
+                            <td>Interests: <repeat group ="{{ @interests }}" value="{{ @interest }}">
+                                {{ @interest }}
+                            </repeat></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row pl-3">
+                <div class="form-group ">
+                    <div class="container-fluid" col-md-5>
+                        <img src="images/profile.png" class="img-main rounded-circle" alt="loving fingers" ><br>
+                        <h2 class="text-center text-info"> Biography </h2>
+                        <p>{{@biography}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!--Next Button -->
+            <div class="container ">
+                <div class="row">
+                    <div class="col-md-12 bg-light text-center">
+                        <button type="submit" class="btn btn-outline-info btn-lg ">Contact Me</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
