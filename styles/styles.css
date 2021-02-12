@@ -1,6 +1,13 @@
+/*
+Autor: Nematullah Ayaz
+date: 01/28/2021
+stylesheet for dating site
+ */
+.comments{
+    padding-left: 30px;
+}
 .row {
    border-style: solid;
-    border-color: black;
     margin: 50px;
     display: flex;
     padding: 50px;
@@ -13,7 +20,7 @@
     text-align-all: center;
 }
 nav{
-    background-color: black;
+    background-color: #262626;
 }
 .navbar-brand{
     color: white;
