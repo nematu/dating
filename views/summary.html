@@ -17,56 +17,34 @@
 </nav>
 
 <div class="container">
-    <div class="border rounded mt-5 p-4">
+    <div class="border rounded mt-5 ">
         <div class="row">
-            <div class="col">
-                <table class="table table-bordered col">
-                    <tbody>
-                        <tr>
-                            <td>Name: {{@name}}</td>
-                        </tr>
-                        <tr>
-                            <td>Gender: {{@gender}}</td>
-                        </tr>
-                        <tr>
-                            <td>Age: {{@age}}</td>
-                        </tr>
-                        <tr>
-                            <td>Phone: {{@phone}}</td>
-                        </tr>
-                        <tr>
-                            <td>Email: {{@email}}</td>
-                        </tr>
-                        <tr>
-                            <td>State: {{@state}}</td>
-                        </tr>
-                        <tr>
-                            <td>Seeking: {{@seeking}}</td>
-                        </tr>
-                        <tr>
-                            <td>Interests: <repeat group ="{{ @interests }}" value="{{ @interest }}">
-                                {{ @interest }}
-                            </repeat></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <div class="border rounded">
+                <h6 class="p-3 mb-0 border-bottom">Name: {{@SESSION.fname}} , {{@SESSION.lname}} </h6>
+                <h6 class="p-3 mb-0 border-bottom">Gender: {{@SESSION.userGender}}</h6>
+                <h6 class="p-3 mb-0 border-bottom">Age: {{@SESSION.age}}</h6>
+                <h6 class="p-3 mb-0 border-bottom">Phone: {{@SESSION.phone}}</h6>
+                <h6 class="p-3 mb-0 border-bottom">Email: {{@SESSION.email}}</h6>
+                <h6 class="p-3 mb-0 border-bottom">State: {{@SESSION.state}}</h6>
+                <h6 class="p-3 mb-0 border-bottom">Seeking: {{@SESSION.seeking}}</h6>
+                <h6 class="p-3 mb-0">Interests: {{@SESSION.indoorAndOutdoor}}</h6><br>
+            </div><br>
 
             <div class="row pl-3">
                 <div class="form-group ">
                     <div class="container-fluid" col-md-5>
                         <img src="images/profile.png" class="img-main rounded-circle" alt="loving fingers" ><br>
                         <h2 class="text-center text-info"> Biography </h2>
-                        <p>{{@biography}}</p>
+                        <textarea class="form-control text-info"  placeholder="{{@SESSION.bio}}"  rows="10"></textarea>
                     </div>
                 </div>
-            </div>
+            </div><br>
 
             <!--Next Button -->
-            <div class="container ">
+            <div class="container mt-3 ">
                 <div class="row">
                     <div class="col-md-12 bg-light text-center">
-                        <button type="submit" class="btn btn-outline-info btn-lg ">Contact Me</button>
+                        <button type="submit" class="btn btn-info btn-lg ">Contact Me</button>
                     </div>
                 </div>
             </div>

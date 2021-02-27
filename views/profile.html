@@ -20,62 +20,76 @@
     <div class="border rounded mt-4 p-4 pb-5 mb-4">
         <h2 class="text-info">Profile</h2>
         <hr>
-        <form action ="interest" method="post">
+        <form method="post" action="#">
             <div class="row">
-                <div class="col-sm-8">
-                    <label for="email" class="font-weight-bold">Email</label>
-                    <input type="text" class="form-control" id="email" name="email"><br>
 
-                    <label for="state" class="font-weight-bold">State</label>
-                    <select id="state" name="state" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>Alabama</option>
-                        <option>Alaska</option>
-                        <option>Arizona</option>
-                        <option>Arkansas</option>
-                        <option>California</option>
-                        <option>Colorado</option>
-                        <option>Connecticut</option>
-                        <option>Delaware</option>
-                        <option>District Of Columbia</option>
-                        <option>Florida</option>
-                        <option>Georgia</option>
-                        <option>Washington</option>
+                <div class="col-lg-6 col-md-12">
 
-                    </select>
-
-
-                    <!-- Seeking Radio Options -->
-                    <div class="form-group mt-2">
-                        <label class="font-weight-bold">Seeking</label><br>
-                        <!-- Radios-->
-                        <label for= "male2" class="radio-inline">
-                            <input  type="radio" name="gender2[]" id="male2" value="male"> Male</label>
-                        <label for="female2" class="radio-inline">
-                            <input type="radio" name="gender2[]" id="female2" value="female"> Female</label><br>
-
-                    </div>
-
-                </div>
-                <div class="col-lg-4 col-md-12">
                     <div class="form-group">
-                        <label for="biography"class="font-weight-bold">Biography:</label>
-                        <textarea class="form-control" rows="4" id="biography" name="biography" placeholder="Entering a brief description about yourself"></textarea>
+                        <label class="font-weight-bold" for="email">Email</label>
+                        <input type="text" class="form-control text-info" id="email" name="email"
+                               value="{{@email}}">
+
+                        <!--  Error Message  -->
+                        <check if="{{isset(@errors['email'])}}">
+                            <p class="text-warning">{{@errors['email']}}</p>
+                        </check>
                     </div>
-                </div>
-                <!--Next Button -->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 bg-light text-right">
-                            <button type="submit" class="btn btn-info">Next ></button>
+                    <div class="form-group">
+                        <label class="font-weight-bold">State</label>
+
+                        <select  name="states" class="custom-select text-info">
+                            <option selected></option>
+                            <repeat group="{{@states}}" value="{{@state}}">
+                                <check if="{{@state}} == {{@userState}}">
+                                    <true>
+                                        <option selected>{{@state}}</option>
+                                    </true>
+                                    <false>
+                                        <option >{{@state}}</option>
+                                    </false>
+                                </check>
+                            </repeat>
+                        </select>
+                        <check if="{{isset(@errors['states'])}}">
+                            <p class="text-warning">{{@errors['states']}}</p>
+                        </check>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label class="font-weight-bold">Seeking</label>
                         </div>
+
+                        <repeat group="{{@genders}}" value="{{@gender}}">
+                            <div class="form-check form-check-inline">
+
+                                <input class="form-check-input" type="radio" name="seeking" value="{{@gender}}"
+                                <check if="{{@seeking}} == {{@gender}}">
+                                    checked
+                                </check>
+                                >
+                                <label class="form-check-label" >{{@gender}}</label>
+                            </div>
+                        </repeat>
                     </div>
                 </div>
 
+                <div class="col-lg-6 col-md-12">
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="bio">Biography</label>
+                        <textarea class="form-control text-info" id="bio" name="bio"
+                                  maxlength="1600" rows="6">{{@bio}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-right">
+                    <button type="submit" class="btn btn-info">Next >></button>
+                </div>
             </div>
         </form>
     </div>
 </div>
-
 </body>
 </html>

@@ -15,130 +15,36 @@
         </ul>
     </div>
 </nav>
+<div class="container border rounded mt-4 p-4">
 
-<div class="container">
-    <div class="border rounded mt-4 p-4 pb-5 mb-4">
-        <h2 class="text-info">Interests</h2>
-        <hr>
-        <form action= "summary" method="POST">
+    <h2 class="text-info">Interests</h2>
+    <hr>
+    <form method="post" action="#">
+        <!-- Row 1 -->
+        <label class="font-weight-bold">In-door Interests</label>
+        <div class="form-row justify-content-center">
+            <repeat group="{{@indoor}}" value="{{@interest}}">
+                <div class="form-group col-3">
+                    <input type="checkbox" name="indoorInterests[]" value="{{@interest}}">
+                    <label>{{@interest}}</label>
+                </div>
+            </repeat>
+        </div>
 
-            <label class="font-weight-bold"> In-Door Interests</label>
-            <div class="row pl-3">
-                <!-- In Door row -->
+        <label class="font-weight-bold">Out-door Interests</label>
+        <div class="form-row">
+            <repeat group="{{@outdoor}}" value="{{@interest}}">
                 <div class="form-group col-3">
-                    <div class="form-check">
-                        <label class="form-check-label" >
-                            <input type="checkbox" class="form-check-input" name = "s[]"  value="tv">tv
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name = "interests[]" value="puzzles">puzzles
-                        </label>
-                    </div>
+                    <input type="checkbox" name="outdoorInterests[]" value="{{@interest}}">
+                    <label>{{@interest}}</label>
                 </div>
-                <!-- column separation -->
-                <div class="form-group col-3">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name = "interests[]" value="movies">movies
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name = "interests[]" value="reading">reading
-                        </label>
-                    </div>
-                </div>
-                <!-- column separation -->
-                <div class="form-group col-3">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name = "interests[]" value="cooking">cooking
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name = "interests[]" value="cards">playing cards
-                        </label>
-                    </div>
-                </div>
-                <!-- column separation -->
-                <div class="form-group col-3">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name = "interests[]" value="board games">board games
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name = "interests[]" value="video games">video games
-                        </label>
-                    </div>
-                </div>
+            </repeat>
+        </div>
+            <div class="col text-right">
+
+                <button type="submit" class="btn btn-info">Next ></button>
             </div>
-
-            <!-- Out Door Section -->
-            <label class="font-weight-bold"> Out-Door Interests</label>
-            <div class="row pl-3">
-                <!-- In Door row -->
-                <div class="form-group col-3">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name = "interests[]" value="hike">hiking
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name = "interests[]" value="walk">walking
-                        </label>
-                    </div>
-                </div>
-                <!-- column separation -->
-                <div class="form-group col-3">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name = "interests[]" value="bike">biking
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input"  name = "interests[]" value="climb">climbing
-                        </label>
-                    </div>
-                </div>
-                <!-- column separation -->
-                <div class="form-group col-3">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name = "interests[]" value="swim">swimming
-                        </label>
-                    </div>
-
-                </div>
-                <!-- column separation -->
-                <div class="form-group col-3">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input"  name = "interests[]" value="collect">collecting
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-
-                <!--Next Button -->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 bg-light text-right">
-                            <button type="submit" class="btn btn-info">Next ></button>
-                        </div>
-                    </div>
-                </div>
-
-        </form>
-    </div>
+    </form>
 </div>
-
 </body>
 </html>
