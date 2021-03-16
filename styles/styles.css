@@ -1,41 +1,14 @@
-/*
-Autor: Nematullah Ayaz
-date: 01/28/2021
-stylesheet for dating site
- */
-.comments{
-    padding-left: 30px;
-}
-.row {
-   border-style: solid;
-    margin: 50px;
-    display: flex;
-    padding: 50px;
+#introImg {
+    height: 600px;
+    width: 600px;
 }
 
-.column {
-    flex: 50%;
+#quoteHolder {
+    margin-left: 5%;
+    margin-right: 5%;
 }
-.title{
-    text-align-all: center;
-}
-nav{
-    background-color: #262626;
-}
-.navbar-brand{
-    color: white;
-    font-weight: bold;
 
-}
-.img-main {
-    margin-left: 70px;
-
-
-}
-.body-txt {
-    font-weight: normal;
-}
-#btn-profile {
-    float: inherit;
-    border-radius: 10px;
+#profile {
+    width: 75%;
+    height: 75%;
 }
