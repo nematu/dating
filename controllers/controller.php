@@ -1,269 +1,264 @@
 <?php
 /**
  * Controller Class
- * Nematullah Ayaz
+ * @author Nematullah Ayaz
+ * @version 1.0
  */
 
 class Controller
 {
     private $_f3;
 
-    /**
-     * Controller constructor.
-     * @param $f3 Object fat-free hive
-     */
-    public function __construct($f3)
+    function __construct($f3)
     {
-        global $dataLayer;
         $this->_f3 = $f3;
-        //Set states, genders, and interest arrays to $f3
-        $this->_f3->set('states', $dataLayer->getStates());
-        $this->_f3->set('genders', $dataLayer->getGenders());
-        $this->_f3->set('iInterestList', $dataLayer->getIndoorInterests());
-        $this->_f3->set('oInterestList', $dataLayer->getOutdoorInterests());
-
     }
 
     /**
-     * Displays the home page
+     * routing to home page
      */
     function home()
     {
-        //Set global variables and page title
-        $this->_f3->set('title', 'Adventure Date!');
-
-        //Render the page
         $view = new Template();
         echo $view->render('views/home.html');
     }
 
     /**
-     * Displays page 1 of profile creation
+     * routing to personal page
      */
     function personal()
     {
-        //Set global variables and page title
+        //add global variables
         global $validator;
-        $this->_f3->set('title', 'Profile Creation');
+        global $dataLayer;
+        global $member;
 
-        //Save POST content to $f3 for sticky forms
-        $this->_f3->set('fName', isset($_POST['fName']) ? $_POST['fName'] : "");
-        $this->_f3->set('lName', isset($_POST['lName']) ? $_POST['lName'] : "");
-        $this->_f3->set('age', isset($_POST['age']) ? $_POST['age'] : "");
-        $this->_f3->set('userGender', isset($_POST['userGender']) ? $_POST['userGender'] : "");
-        $this->_f3->set('phone', isset($_POST['phone']) ? $_POST['phone'] : "");
-        $this->_f3->set('premium', isset($_POST['pAccount']) ? "checked": "");
+        //get array
+        $this->_f3->set('genders', $dataLayer->getGender());
 
-        //If POST array is set
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
 
-            $age = $_POST['age'];
+        //if the form has been submitted
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //get the data from the POST array
+            $userFname = $_POST['fname'];
+            $userLname = $_POST['lname'];
+            $userGender = $_POST['gender'];
+            $userAge = $_POST['age'];
+            $userPhone = $_POST['pnumber'];
+            $isPremium = $_POST['isPremium'];
 
-            //Validate fNAme, if valid save to SESSION, else set error
-            if($validator->validName($_POST['fName'])){
-                $_SESSION['fName'] = $_POST['fName'];
-            }
-            else{
-                $this->_f3->set("errors['fName']", 'Please enter a valid first name');
-            }
 
-            //Validate lNAme, if valid save to SESSION, else set error
-            if($validator->validName($_POST['lName'])){
-                $_SESSION['lName'] = $_POST['lName'];
-            }
-            else{
-                $this->_f3->set("errors['lName']", 'Please enter a valid last name');
+            if(isset($isPremium)){
+                $member = new PremiumMember($userFname, $userLname, $userAge, $userGender, $userPhone);
+            } else {
+                $member = new Member($userFname, $userLname, $userAge, $userGender, $userPhone);
             }
 
-            //Validate age, if valid save to SESSION, else set error
-            if($validator->validAge($_POST['age'])){
-                $_SESSION['age'] = $_POST['age'];
+
+            if($validator->validFname($userFname)){
+                $member->setFname($userFname);
             }
-            else{
-                $this->_f3->set("errors['age']", 'Please enter a valid age (between 18 - 118)');
+            else {
+                $this->_f3->set('errors["fname"]', "First Name is required !");
             }
 
-            //Validate phone, if valid save to SESSION, else set error
-            if($validator->validPhone($_POST['phone'])){
-                $_SESSION['phone'] = $_POST['phone'];
+            if($validator->validLname($userLname)){
+                //$_SESSION['lname'] = $userLname;
+                $member->setLname($userLname);
             }
-            else{
-                $this->_f3->set("errors['phone']", 'Please enter a 10-digit phone number');
-            }
-
-            //Validate userGender, if valid save to SESSION, else set 'Not Specified'
-            if($validator->validGender($_POST['userGender'])){
-                $_SESSION['userGender'] = $_POST['userGender'];
-            }
-            else{
-                $_SESSION['userGender'] = "Not Specified";
+            else {
+                $this->_f3->set('errors["lname"]', "Last Name is required !");
             }
 
-            //If premium account option was selected, save to SESSION
-            $_SESSION['pAccount'] = isset($_POST['pAccount']);
+            //validate gender
+            if(isset($userGender)){
+                $member->setGender($userGender);
+            }
+
+            //validate age
+            if($validator->validAge($userAge)){
+                //$_SESSION['age'] = $userAge;
+                $member->setAge($userAge);
+            }
+            else {
+                $this->_f3->set('errors["age"]', "Enter Age and should be between 18 and 118");
+            }
 
 
-            //If all fields are valid, route to profile
+            if($validator->validPhone($userPhone)){
+                $member->setPhone($userPhone);
+            }
+            else {
+                $this->_f3->set('errors["pnumber"]', "Phone number must be 10 digits long");
+            }
+
             if(empty($this->_f3->get('errors'))){
-
-                //Save data to new PremiumMember object if premium checkbox selected
-                if($_SESSION['pAccount']){
-                    $member = new PremiumMember(
-                        $_SESSION['fName'],
-                        $_SESSION['lName'],
-                        $_SESSION['age'],
-                        $_SESSION['userGender'],
-                        $_SESSION['phone']
-                    );
-                }
-                //Otherwise Save data to new Member object
-                else{
-                    $member = new Member(
-                        $_SESSION['fName'],
-                        $_SESSION['lName'],
-                        $_SESSION['age'],
-                        $_SESSION['userGender'],
-                        $_SESSION['phone']
-                    );
-                }
-
-                //Save member object to $_SESSION
                 $_SESSION['member'] = $member;
-
-                $this->_f3->reroute('profile');
+                $this->_f3->reroute('/profile');
             }
         }
 
-        //Render the page
+        //make form sticky
+        $this->_f3->set('userFname', isset($userFname) ? $userFname : "");
+        $this->_f3->set('userLname', isset($userLname) ? $userLname : "");
+        $this->_f3->set('userAge', isset($userAge) ? $userAge : "");
+        $this->_f3->set('userGender', isset($userGender) ? $userGender : "");
+        $this->_f3->set('userPhone', isset($userPhone) ? $userPhone : "");
+
         $view = new Template();
         echo $view->render('views/personal.html');
     }
 
     /**
-     * Displays page 2 of profile creation
+     * Display profle page
      */
     function profile()
     {
-        //Set global variables and page title
+        //add global variables
         global $validator;
-        $this->_f3->set('title', 'Profile Creation');
+        global $dataLayer;
 
-        //Save POST content to $f3 for sticky forms
-        $this->_f3->set('email', isset($_POST['email']) ? $_POST['email'] : "");
-        $this->_f3->set('userState', $_POST['states']);
-        $this->_f3->set('seekingGender', isset($_POST['seekingGender']) ? $_POST['seekingGender'] : "");
-        $this->_f3->set('bio', isset($_POST['bio']) ? $_POST['bio'] : "");
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        //If POST array is set
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            //get the data from the POST array
+            $userEmail = $_POST['email'];
+            $userState = $_POST['state'];
+            $userSeeking = $_POST['seeking'];
+            $userBio = $_POST['bio'];
 
-            //Validate email, if valid save to SESSION, else set error
-            if($validator->validEmail($_POST['email'])){
-                $_SESSION['email'] = $_POST['email'];
+            //validate email
+            if($validator->validEmail($userEmail)){
+//                $_SESSION['email'] = $userEmail;
+                $_SESSION['member']->setEmail($userEmail);
             }
-            else{
-                $this->_f3->set("errors['email']", 'Valid email required');
-            }
-
-            //Validate states, if valid save to SESSION, else set 'Not Specified'
-            if($validator->validState($_POST['states'])){
-                $_SESSION['states'] = $_POST['states'];
-            }
-            else{
-                $_SESSION['states'] = "Not Specified";
+            else {
+                $this->_f3->set('errors["email"]', "Enter a Valid Email !");
             }
 
-            //Validate seekingGender, if valid save to SESSION, else set 'Not Specified'
-            if($validator->validGender($_POST['seekingGender'])){
-                $_SESSION['seekingGender'] = $_POST['seekingGender'];
-            }
-            else{
-                $_SESSION['seekingGender'] = "Not Specified";
+            //validate state
+            if(isset($userState)){
+                $_SESSION['member']->setState($userState);
             }
 
-            //Validate bio, if not empty save to SESSION, else set 'Not Specified'
-            if(!empty($_POST['bio'])){
-                $_SESSION['bio'] = $_POST['bio'];
-            }
-            else{
-                $_SESSION['bio'] = "Not Specified";
+
+            //validate seeking
+            if(isset($userSeeking)){
+               $_SESSION['seeking'] = $userSeeking;
+                $_SESSION['member']->setSeeking($userSeeking);
             }
 
-            //If no errors are set, route to interest
+            //validate bio
+            if(isset($userBio)){
+
+                $_SESSION['member']->setBio($userBio);
+            }
+
+
             if(empty($this->_f3->get('errors'))){
-
-                //Save SESSION data to the member object
-                $_SESSION['member']->setEmail($_SESSION['email']);
-                $_SESSION['member']->setState($_SESSION['states']);
-                $_SESSION['member']->setSeeking($_SESSION['seekingGender']);
-                $_SESSION['member']->setBio($_SESSION['bio']);
-
-                $this->_f3->reroute('interest');
+                if ($_SESSION['member'] instanceof PremiumMember) {
+                    //                $_SESSION['member'] = $member;
+                    $this->_f3->reroute('/interests');
+                } else {
+                    $this->_f3->reroute('/summary');
+                }
             }
         }
 
-        //Render the page
+        //get array
+        $this->_f3->set('genders', $dataLayer->getGender());
+
+        //make form sticky
+        $this->_f3->set('userBio', isset($userBio) ? $userBio : "");
+        $this->_f3->set('userSeeking', isset($userSeeking) ? $userSeeking : "");
+        $this->_f3->set('userState', isset($userState) ? $userState : "");
+        $this->_f3->set('userBio', isset($userBio) ? $userBio : "");
+
         $view = new Template();
         echo $view->render('views/profile.html');
     }
 
     /**
-     * Displays page 3 of profile creation
+     * Display interests page
      */
-    function interest()
+    function interests()
     {
-        //If member is not a premium account, redirect them to the summary page
-        if(!$_SESSION['pAccount']){
-            $this->_f3->reroute('summary');
-        }
-
-        //Set global variables and page title
+        //add global variables
         global $validator;
-        $this->_f3->set('title', 'Profile Creation');
+        global $dataLayer;
 
-        //If POST array is set
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
+        //If the form has been submitted
+        if ($_SERVER['REQUEST_METHOD']=='POST') {
 
-            //Validate iInterests, if valid save to SESSION, else set to empty
-            if(isset($_POST['iInterests']) && $validator->validIndoor($_POST['iInterests'])){
-                $_SESSION['iInterests'] = $_POST['iInterests'];
+            //get interests from post array
+            $userIndoor = $_POST['indoorInterests'];
+            $userOutdoor = $_POST['outdoorInterests'];
+
+
+            //validate indoor activities
+            if(isset($userIndoor)) {
+                //Data is valid -> Add to session
+                if ($validator->validIndoor($userIndoor)) {
+                    $indoorList = implode(", ", $_POST['indoorInterests']);
+                    $_SESSION['member']->setInDoorInterests($indoorList);
+                } //Data is not valid -> We've been spoofed!
+                else {
+                    $this->_f3->set('errors["indoor"]', "wrong action!");
+                }
             }
-            else{
-                //Set as array so it can be merged
-                $_SESSION['iInterests'] = array();
+
+            //validate outdoor activities
+            if(isset($userOutdoor)) {
+                //Data is valid -> Add to session
+                if ($validator->validOutdoor($userOutdoor)) {
+                  $_SESSION['outdoorInterests'] = implode(", ", $_POST['outdoorInterests']);
+                    $outdoorList = implode(", ", $_POST['outdoorInterests']);
+                    $_SESSION['member']->setOutDoorInterests($outdoorList);
+                }
+                else {
+                    $this->_f3->set('errors["outdoor"]', "wrong action!");
+                }
             }
 
-            //Validate oInterests, if valid save to SESSION, else set to empty
-            if(isset($_POST['oInterests']) && $validator->validOutdoor($_POST['oInterests'])){
-                $_SESSION['oInterests'] = $_POST['oInterests'];
+            if (empty($this->_f3->get('errors'))) {
+                $this->_f3->reroute('/summary');
             }
-            else{
-                //Set as array so it can be merged
-                $_SESSION['oInterests'] = array();
-            }
-
-            $_SESSION['member']->setInDoorInterests($_SESSION['iInterests']);
-            $_SESSION['member']->setOutDoorInterests($_SESSION['oInterests']);
-
-            //Reroute to summary
-            $this->_f3->reroute('summary');
         }
 
-        //Render the page
+        //get arrays
+        $this->_f3->set('indoor', $dataLayer->getIndoor());
+        $this->_f3->set('outdoor', $dataLayer->getOutdoor());
+
         $view = new Template();
-        echo $view->render('views/interest.html');
+        echo $view->render('views/interests.html');
     }
 
     /**
-     * Displays the profile summary page
+     * Display summary page
      */
     function summary()
     {
-        //Set global variables and page title
-        $this->_f3->set('title', 'Your Profile');
+        global $dataLayer;
+        $dataLayer->insertMember($_SESSION['member']);
 
-        //Render the page
         $view = new Template();
         echo $view->render('views/summary.html');
+
+        //clear session
+        session_destroy();
     }
+
+    /**
+     * Display admin page
+     */
+    function admin()
+    {
+        global $dataLayer;
+
+        $members_table = $dataLayer->getMembers();
+        $this->_f3->set('members', $members_table);
+
+        $view = new Template();
+        echo $view->render('views/admin.html');
+    }
+
 }
