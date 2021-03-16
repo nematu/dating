@@ -1,10 +1,10 @@
 <?php
+
 /**
  * Nematullah Ayaz
+ * jan 26, 2021
  * Dating Assignment
- * Jan 26/2021
  */
-
 //Turn on error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -12,52 +12,56 @@ error_reporting(E_ALL);
 //Require the autoload file
 require_once('vendor/autoload.php');
 
-//Session start after require_once
+//Start a session
 session_start();
 
-//Create an instance of the Base Class
+//connect to database
+require $_SERVER['DOCUMENT_ROOT'] . '/../config.php';
+
+//Instantiate my classes
 $f3 = Base::instance();
 $validator = new Validate();
-$dataLayer = new DataLayer();
+$dataLayer = new DataLayer($dbh);
 $controller = new Controller($f3);
 
-//Turn on Fat-Free error reporting
 $f3->set('DEBUG', 3);
 
 //Define a default root (home page)
-$f3->route('GET /', function ($f3)
-{
+$f3->route('GET /', function () {
     global $controller;
     $controller->home();
 });
 
-//personal Route
-$f3->route('GET|POST /personal', function ($f3)
-{
+//Define a personal information route
+$f3->route('GET|POST /personal', function() {
     global $controller;
     $controller->personal();
 });
 
-//profile Route
-$f3->route('GET|POST /profile', function ($f3)
-{
+//Define a profile route
+$f3->route('GET|POST /profile', function() {
     global $controller;
     $controller->profile();
 });
 
-//interest Route
-$f3->route('GET|POST /interest', function ($f3)
-{
-   global $controller;
-   $controller->interest();
+//Define an interests route
+$f3->route('GET|POST /interests', function() {
+    global $controller;
+    $controller->interests();
 });
 
-//Summary Route
-$f3->route('GET|POST /summary', function ($f3)
-{
+//Define a summary route
+$f3->route('GET|POST /summary', function() {
+
     global $controller;
     $controller->summary();
 });
 
+//Define a admin route
+$f3->route('GET /admin', function() {
+
+    global $controller;
+    $controller->admin();
+});
 //Rune fat free
 $f3->run();
