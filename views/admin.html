@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <title>Dating</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-info bg-info">
+    <a class="navbar-brand text-white font-weight-bold" href="{{ @BASE }}">My Moon</a>
+    <a class="navbar-brand text-white ml-auto font-weight-bold" href="admin">Admin</a>
+</nav>
+
+<div class="container pt-3">
+    <h2>Summary of Members</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+                <th scope="col">State</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Seeking</th>
+                <th scope="col">Premium</th>
+                <th scope="col">Interests</th>
+            </tr>
+        </thead>
+        <tbody>
+            <repeat group="{{ @members }}" value="{{ @member }}">
+                <tr>
+                        <th scope="row" >{{ @member['member_id']}}</th>
+                        <td class="text-info">{{ @member['fname'] }} {{ @member['lname'] }}</td>
+                        <td class="text-info">{{ @member['age'] }}</td>
+                        <td class="text-info">{{ @member['phone'] }}</td>
+                        <td class="text-info">{{ @member['email'] }}</td>
+                        <td class="text-info">{{ @member['state'] }}</td>
+                        <td class="text-info">{{ @member['gender'] }}</td>
+                        <td class="text-info">{{ @member['seeking'] }}</td>
+                        <td class="text-info">
+                            <input type="checkbox"
+                            <check if="{{ @member.premium }}">
+                                checked
+                            </check>>
+                        </td>
+                        <td class="text-info">{{ @member['interests'] }}</td>
+                </tr>
+            </repeat>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,59 +1,61 @@
-<!-- Nematullah Ayaz
-Sample Dating Site
-Date : 28/01/2021
--->
-
-<!DOCTYPE html>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!--
+        Nematullah Ayaz
+        January 26, 2021
+    -->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Added my stylesheet -->
     <link rel="stylesheet" href="styles/styles.css">
-    <title>Dating</title>
+
+    <title>My Moon </title>
 </head>
 <body>
-<div class="border border-top-0 border-light ">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav">
-                <li ><a class=" navbar-brand"  href="#">My Moon</a></li>
-            </ul>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-info bg-info">
+        <a class="navbar-brand text-white" href="{{ @BASE }}">My Moon Dating </a>
+        <a class="navbar-brand text-white ml-auto" href="admin">Admin</a>
     </nav>
-</div>
 
-<div class="row border">
-    <div class="column">
-        <h1 class="text-center text-info">My Moon</h1>
-        <p class = body-txt" >Welcome to <b>My Moon</b> dating site. our aims is to connect you with another like minded individuals
-            with whom you can build successful relation and off course create a new family "a genuine word for our existence and coexistence".</p>
-        <p >We have the highest success rate of couples on the web. Users' are precisely matched by their interest,
-            common believes and location. Find out why so many others have found love on our site ! </p>
+    <div class="container pt-3">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center text-info">My Moon</h1>
+                <p class = body-txt" >Welcome to <b>My Moon</b> dating site. our aims is to connect you with another like minded individuals
+                    with whom you can build successful relation and off course create a new family "a genuine word for our existence and coexistence".</p>
+                <p >We have the highest success rate of couples on the web. Users' are precisely matched by their interest,
+                    common believes and location. Find out why so many others have found love on our site ! </p>
 
-        <h3 class="text-center"> Hear what our users are saying about us.</h3>
-        <hr>
-        <div class = "comments">
-        <p><I>" I met the love of my life after only a month! - Andrea "</I></p>
-        <p><I>"It was so easy to set up and profile and start meeting people.<br>I didn't realize how many
-            others were looking for love in my area. " -John Smith</I></p>
-        <p><I>"Just try it! You'll never be the same!" -Sarah</I></p><br>
-        <hr>
+                <h4 class="text-center"> Hear what our users are saying about us.</h4>
+                <hr>
+                <div class = "comments">
+                    <p><I>" I met the love of my life after only a month! - Andrea "</I></p>
+                    <p><I>"It was so easy to set up and profile and start meeting people.<br>I didn't realize how many
+                        others were looking for love in my area. " -John Smith</I></p>
+                    <p><I>"Just try it! You'll never be the same!" -Sarah</I></p><br>
+                    <hr>
+                </div>
+                <div class="row justify-content-center">
+                    <form method="get" action="personal">
+                        <button type="submit" class="btn btn-info btn-lg rounded mt-2">Create Profile</button>
+                    </form>
+                </div>
+            </div>
+            <div class="column">
+                <img src="images/dating.jpg" class="img-main rounded-circle" alt="loving fingers" >
+            </div>
         </div>
-
-        <div class="text-center">
-            <a class="btn btn-info" href="personal" role="button">Create Profile</a>
-        </div>
-
     </div>
 
-
-    <div class="column">
-        <img src="images/dating.jpg" class="img-main rounded-circle" alt="loving fingers" >
-
-
-    </div>
-</div>
-
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,91 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../styles/forms.css">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/styles.css">
 
     <title>Dating</title>
 </head>
 <body>
-<nav class="navbar navbar-inverse text-white bg-dark">
-    <div class="container-fluid">
-        <ul class="nav navbar-nav">
-            <li ><a class=" navbar-brand text-white"  href="https://nayaz.greenriverdev.com/328/dating/">My Moon</a></li>
-        </ul>
-    </div>
-</nav>
+    <nav class="navbar navbar-expand-lg navbar-info bg-info">
+        <a class="navbar-brand text-white" href="{{ @BASE }}">My Moon</a>
+        <a class="navbar-brand text-white ml-auto" href="admin">Admin</a>
+    </nav>
 
-<div class="container">
-    <div class="border rounded mt-4 p-4 pb-5 mb-4">
-        <h2 class="text-info">Personal Information</h2>
+    <div class="container pt-3">
+        <h1 class="text-info">Personal Information</h1>
         <hr>
         <form method="post" action="#">
-            <div class="row">
-                <div class="col-lg-8 col-md-12">
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="fname">First Name</label>
-                        <input type="text" class="form-control text-info" id="fname" name="fname"
-                               value="{{@fname}}">
-
-                        <check if="{{isset(@errors['fname'])}}">
-                            <p class="text-warning">{{@errors['fname']}}</p>
-                        </check>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="lname">Last Name</label>
-                        <input type="text" class="form-control text-info" id="lname" name="lname" placeholder=""
-                               value="{{@lname}}">
-
-                        <check if="{{isset(@errors['lname'])}}">
-                            <p class="text-warning">{{@errors['lname']}}</p>
-                        </check>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="age">Age</label>
-                        <input type="text" class="form-control text-info" id="age" name="age" placeholder=""
-                               value="{{@age}}">
-
-
-                        <check if="{{isset(@errors['age'])}}">
-                            <p class="text-warning">{{@errors['age']}}</p>
-                        </check>
-                    </div>
-                    <div class="form-group" >
-
-                        <div>
-                            <label class="font-weight-bold">Gender</label>
+            <div class ="row">
+                <div class="col-8">
+                        <!-- First Name -->
+                        <div class="form-group">
+                            <label for="fname"><b>First Name: </b> </label>
+                            <input type="text" class="form-control text-info" id="fname" name = "fname"  value="{{ @userFname }}">
+                            <check if="{{ isset(@errors['fname']) }}">
+                                <p class="text-warning">{{@errors['fname']}}</p>
+                            </check>
                         </div>
 
+                        <!-- Last Name -->
+                        <div class="form-group">
+                            <label for="lname"><b>Last Name: </b></label>
+                            <input type="text" class="form-control text-info" id="lname" name = "lname"  value="{{ @userLname }}">
+                            <check if="{{ isset(@errors['lname']) }}">
+                                <p class="text-warning">{{@errors['lname']}}</p>
+                            </check>
+                        </div>
 
-                        <repeat group="{{@genders}}" value="{{@gender}}">
-                            <div class="form-check form-check-inline">
+                        <!-- Age -->
+                        <div class="form-group">
+                            <label for="age"><b>Age: </b></label>
+                            <input type="number" class="form-control text-info" id="age" name = "age"  value="{{ @userAge }}">
+                            <check if="{{ isset(@errors['age']) }}">
+                                <p class="text-warning">{{@errors['age']}}</p>
+                            </check>
+                        </div>
 
-                                <input class="form-check-input" type="radio" name="userGender" value="{{@gender}}"
-                                <check if="{{@userGender}} == {{@gender}}">
-                                    checked
-                                </check>
-                                >
-                                <label class="form-check-label" >{{@gender}}</label>
-                            </div>
-                        </repeat>
+                        <!-- Gender -->
+                        <div class="form-group">
+                            <p><b>Gender: </b></p>
+                            <repeat group="{{ @genders }}" value="{{ @gender}}">
+                                <label class="radioFormat">
+                                    <input type="radio" name="gender" id="{{ @gender }}" value="{{ @gender }}"
+                                    <check if="{{ @gender == @userGender}}">checked</check>>
+
+                                    {{ ucfirst(@gender) }}
+                                </label>
+                            </repeat>
+                        </div>
+
+                        <!-- Phone number -->
+                        <div class="form-group">
+                            <label for="pnumber"><b>Phone Number: </b></label>
+                            <input type="text" class="form-control text-info" id="pnumber" name = "pnumber"  value="{{ @userPhone }}">
+                            <check if="{{ isset(@errors['pnumber']) }}">
+                                <p class="text-warning">{{@errors['pnumber']}}</p>
+                            </check>
+                        </div>
+
+                        <!-- Premium Membership -->
+                        <p><b>Premium Account</b></p>
+
+                    <div class="form-check">
+                        <label class="form-check-label" for="isPremium">
+                            <input class="form-check-input" type="checkbox" id="isPremium" name="isPremium">
+                            Sign me up for a Premium Account
+                        </label>
                     </div>
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="phone">Phone Number</label>
-                        <input type="text" class="form-control text-info" id="phone" name="phone" placeholder="xxx-xxx-xxxx"
-                               maxlength="10"
-                               value="{{@phone}}">
 
-
-                        <check if="{{isset(@errors['phone'])}}">
-                            <p class="text-warning">{{@errors['phone']}}</p>
-                        </check>
-                    </div>
                 </div>
-
-
                 <div class="col-lg-4 col-md-12 mt-4 pt-2">
                     <div class="mb-3 border bg p-2 align-items-center">
                         <p>
@@ -95,18 +90,20 @@
                         </p>
                     </div>
                 </div>
-            </div>
-                <!--Next Button -->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 bg-light text-right">
-                            <button type="submit" class="btn btn-info">Next ></button>
-                        </div>
-                    </div>
-                </div>
-        </form>
-    </div>
-</div>
 
+                <div class="col text-right">
+                    <button type="submit" class="btn btn-info btn-lg rounded">Next</button>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+        </div>
+    </div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

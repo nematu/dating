@@ -1,56 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../styles/forms.css">
 
-    <title>Summary</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <title>Dating</title>
 </head>
 <body>
-<nav class="navbar navbar-inverse text-white bg-dark">
-    <div class="container-fluid">
-        <ul class="nav navbar-nav">
-            <li ><a class=" navbar-brand text-white"  href="https://nayaz.greenriverdev.com/328/dating/">My Moon</a></li>
-        </ul>
-    </div>
-</nav>
+    <nav class="navbar navbar-expand-lg navbar-info bg-info">
+        <a class="navbar-brand text-white font-weight-bold" href="{{ @BASE }}">My Moon</a>
+        <a class="navbar-brand text-white ml-auto font-weight-bold" href="admin">Admin</a>
+    </nav>
 
-<div class="container">
-    <div class="border rounded mt-5 ">
+    <div class="container border p-3 rounded">
         <div class="row">
-            <div class="border rounded">
-                <h6 class="p-3 mb-0 border-bottom">Name: {{@SESSION.fname}} , {{@SESSION.lname}} </h6>
-                <h6 class="p-3 mb-0 border-bottom">Gender: {{@SESSION.userGender}}</h6>
-                <h6 class="p-3 mb-0 border-bottom">Age: {{@SESSION.age}}</h6>
-                <h6 class="p-3 mb-0 border-bottom">Phone: {{@SESSION.phone}}</h6>
-                <h6 class="p-3 mb-0 border-bottom">Email: {{@SESSION.email}}</h6>
-                <h6 class="p-3 mb-0 border-bottom">State: {{@SESSION.state}}</h6>
-                <h6 class="p-3 mb-0 border-bottom">Seeking: {{@SESSION.seeking}}</h6>
-                <h6 class="p-3 mb-0">Interests: {{@SESSION.indoorAndOutdoor}}</h6><br>
-            </div><br>
-
-            <div class="row pl-3">
-                <div class="form-group ">
-                    <div class="container-fluid" col-md-5>
-                        <img src="images/profile.png" class="img-main rounded-circle" alt="loving fingers" ><br>
-                        <h2 class="text-center text-info"> Biography </h2>
-                        <textarea class="form-control text-info"  placeholder="{{@SESSION.bio}}"  rows="10"></textarea>
-                    </div>
-                </div>
-            </div><br>
-
-            <!--Next Button -->
-            <div class="container mt-3 ">
-                <div class="row">
-                    <div class="col-md-12 bg-light text-center">
-                        <button type="submit" class="btn btn-info btn-lg ">Contact Me</button>
-                    </div>
-                </div>
+            <div class="col">
+                <table class="table table-bordered table-curved">
+                    <tbody  class="p-3 mb-0 border-bottom">
+                        <tr>
+                            <td >Name: {{ @SESSION.member->getFname() }} {{ @SESSION.member->getLname() }}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender: {{ @SESSION.member->getGender() }}</td>
+                        </tr>
+                        <tr>
+                            <td>Age: {{ @SESSION.member->getAge() }}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone: {{ @SESSION.member->getPhone() }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email: {{ @SESSION.member->getEmail() }}</td>
+                        </tr>
+                        <tr>
+                            <td>State: {{ @SESSION.member->getState() }}</td>
+                        </tr>
+                        <tr>
+                            <td>Seeking: {{ @SESSION.member->getSeeking() }}</td>
+                        </tr>
+                        <tr>
+                            <check if="{{ @SESSION.member instanceOf PremiumMember}}">
+                                <td>Interests: {{ @SESSION.member->getInDoorInterests() }}  {{ @SESSION.member->getOutDoorInterests() }}</td>
+                            </check>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
+            <div class="container-fluid col justify-content-center">
+                <img src="images/profile.png" class="justify-content-center rounded img-fluid max-width: 100% height: 25% width: auto" id="profile" alt="profile image">
+                <p>Biography: <br>{{ @SESSION.member->getBio() }}</p><br>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="row justify-content-center">
+                <button type="button" class="btn btn-info btn-lg rounded">Contact Me</button>
+            </div>
         </div>
     </div>
-</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
