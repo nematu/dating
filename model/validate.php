@@ -1,116 +1,86 @@
 <?php
 /**
  * Data Validation Class
+ * @author Nematullah Ayaz
+ * @Version 1.0
  */
 
 class Validate
 {
     private $_dataLayer;
 
-    /**
-     * Validate constructor.
-     */
-    public function __construct()
+    function __construct()
     {
-        $this->_dataLayer = new DataLayer();
+        $this->_dataLayer = new DataLayer($dbh);
     }
 
-    /**
-     * Checks that the supplied name is a String containing only alphabetic characters
-     * @param $name String to validate as a valid name
-     * @return boolean true or false if valid
-     */
-    function validName($name)
+    function validFname($fname)
     {
-        //Verify $name is not empty and is only alphabetical characters
-        return !empty($name) && ctype_alpha($name);
+        return !empty($fname) && ctype_alpha($fname);
     }
 
-    /**
-     * Checks that a supplied age is numeric and between 18-118
-     * @param $age Number to validate as a valid age
-     * @return boolean true or false if valid
-     */
+    function validLname($lname)
+    {
+        return !empty($lname) && ctype_alpha($lname);
+    }
+
     function validAge($age)
     {
-        //Verify $age is a number and is between 18 - 118
-        return is_numeric($age) && $age >= 18 && $age <= 118;
+        if(is_numeric($age) && 18 <= $age && $age <= 118 ){
+            return true;
+        }
+        return false;
     }
 
-    /**
-     * Checks that a supplied Number is a valid phone number containing 10 numbers
-     * @param $phone Number to validate as a valid phone number
-     * @return boolean true if valid, false otherwise
-     */
     function validPhone($phone)
     {
-        //Verify phone number is numeric and has a length of 10
-        return is_numeric($phone) && strlen((string)$phone) == 10;
+        if(!empty($phone) && preg_match('/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/', $phone) && strlen($phone)==10){
+            return true;
+        }
+        return false;
     }
 
-    /**
-     * Checks that a supplied gender exists in data-layer.php
-     * @param $gender String supplied gender
-     * @return bool true if valid, false otherwise
-     */
-    function validGender($gender)
-    {
-        //Verify gender matches the available gender options in data-layer.php
-        return in_array($gender, $this->_dataLayer->getGenders());
-    }
 
-    /**
-     * Checks that a supplied state exists in the data-layer.php
-     * @param $state String supplied state
-     * @return bool true if state is valid, false otherwise
-     */
-    function validState($state)
-    {
-        //Verify state matches the available states in data-layer.php
-        return in_array($state, $this->_dataLayer->getStates());
-    }
-
-    /**
-     * Checks that a supplied String is a valid email address
-     * @param $email String to validate as a valid email address
-     * @return boolean true if email contains proper format, false otherwise
-     */
     function validEmail($email)
     {
-        //Validate email address format
-        $patternEmail = '^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$^';
-        return preg_match($patternEmail, $email);
+        return !empty($email) && preg_match("/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/", $email);
     }
 
-    /**
-     * Checks that all elements in the outdoorInterests array exist in data-layer.php
-     * @param $outdoorInterests array user selected interests
-     * @return bool true if selections are valid, false otherwise
-     */
-    function validOutdoor($outdoorInterests)
+
+    function validOutdoor($selectedOutdoor)
     {
-        //For each element in array, check it is in the data-layer.php array
-        foreach($outdoorInterests as $interest) {
-            if(!in_array($interest, $this->_dataLayer->getOutdoorInterests())) {
+        //Get valid condiments from data layer
+        $validOutdoor = $this->_dataLayer->getOutdoor();
+
+        //Check every selected condiment
+        foreach ($selectedOutdoor as $selected) {
+
+            //If the selected condiment is not in the valid list, return false
+            if (!in_array($selected, $validOutdoor)) {
                 return false;
             }
         }
+
+        //If we haven't false by now, we're good!
         return true;
     }
 
-    /**
-     * Checks that all elements in the indoorInterests array exist in data-layer.php
-     * @param $indoorInterests array user selected interests
-     * @return bool true if selections are valid, false otherwise
-     */
-    function validIndoor($indoorInterests)
+
+    function validIndoor($selectedIndoor)
     {
-        //For each element in array, check it is in the data-layer.php array
-        foreach($indoorInterests as $interest) {
-            if(!in_array($interest, $this->_dataLayer->getIndoorInterests())) {
+        //Get valid condiments from data layer
+        $validIndoor = $this->_dataLayer->getIndoor();
+
+        //Check every selected condiment
+        foreach ($selectedIndoor as $selected) {
+
+            //If the selected condiment is not in the valid list, return false
+            if (!in_array($selected, $validIndoor)) {
                 return false;
             }
         }
+
+        //If we haven't false by now, we're good!
         return true;
     }
 }
